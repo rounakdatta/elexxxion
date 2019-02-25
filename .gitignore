@@ -1,0 +1,5 @@
+# dont't take .ipynb_checkpoints or data files (unnecessary large)
+*/.ipynb_checkpoints/*
+*.csv
+*.json
+
