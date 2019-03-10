@@ -4,7 +4,6 @@
 #*.json
 
 # don't take my binaries
-*
 !/**/
 !*.*
 *.exe
