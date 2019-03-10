@@ -1,6 +1,7 @@
-from myNetaWinnerExpenseScraper import myNetaWinnerExpenseScraper
+from myNetaAdvancedScraper import myNetaAdvancedScraper
 
+baseURL = 'http://myneta.info/westbengal2016/'
 payloadURL = 'http://myneta.info/westbengal2016/index.php?action=showWinnersExpense&sortExp=default'
 scriptId = 'wb_2016_winner_expenses'
 
-myNetaWinnerExpenseScraper(payloadURL, scriptId)
+myNetaAdvancedScraper(baseURL, payloadURL, scriptId, '')
