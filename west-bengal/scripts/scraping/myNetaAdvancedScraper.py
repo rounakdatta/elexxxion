@@ -2,6 +2,8 @@ def myNetaAdvancedScraper(baseURL, payloadURL, scriptId, specialDir):
 	import requests
 	from bs4 import BeautifulSoup
 	import json
+	import urllib.parse as urlparse
+	from candidateProfileScraper import candidateProfileScraper
 
 	rawResponse = requests.get(payloadURL)
 	soupParser = BeautifulSoup(rawResponse.content, 'html.parser')
@@ -18,12 +20,23 @@ def myNetaAdvancedScraper(baseURL, payloadURL, scriptId, specialDir):
 				payload = data.text.lstrip().rstrip()
 				moreData = data.find('a')
 				if moreData is not None:
-					moreData = baseURL + moreData['href']
+					try:
+						moreData = baseURL + moreData['href']
+					except:
+						moreData = None
 				else:
 					moreData = None
 				if payload != '':
 					if moreData is not None:
 						oneRow.append({'data': payload, 'url': moreData})
+						parsedURL = urlparse.urlparse(moreData)
+						try:
+							if 'candidate.php' in moreData:
+								cId = urlparse.parse_qs(parsedURL.query)['candidate_id'][0]
+								candidateProfileScraper(baseURL, moreData, cId, 'candidates/')
+						except Exception as e:
+							print(e)
+							pass					
 					else:
 						oneRow.append(payload)
 
