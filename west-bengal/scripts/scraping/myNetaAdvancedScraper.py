@@ -47,6 +47,12 @@ def myNetaAdvancedScraper(baseURL, payloadURL, scriptId, specialDir):
 		myJson = {}
 		
 		for headingIndex in range(len(tableRows)):
+
+			if len(tableRows[headingIndex]) == 0:
+				continue
+			elif len(tableRows[headingIndex]) != len(tableHeaders):
+				tableRows[headingIndex] = tableRows[headingIndex][:7] + ['NaN'] + tableRows[headingIndex][7:]
+
 			tempDict = {}
 			for i in range(len(tableHeaders)):
 				if tableRows[headingIndex]:
